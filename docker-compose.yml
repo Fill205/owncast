@@ -7,9 +7,17 @@ services:
     hostname: owncast
     restart: 'always'
     volumes:
-      - type: bind
-        source: ./data
-        target: /data/config
+      - data:/app
     ports:
       - 8080:8080/tcp
       - 1935:1935/tcp
+    networks:
+      - frontend
+
+volumes:
+  data:
+    driver: local
+
+networks:
+  frontend:
+    driver: bridge
